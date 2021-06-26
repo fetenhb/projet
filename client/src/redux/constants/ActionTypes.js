@@ -1,0 +1,6 @@
+export const INSCRIPTION = "INSCRIPTION";
+export const CONNEXION = "CONNEXION";
+export const LOADING_UTILISATEUR = "LOADING_UTILISATEUR";
+export const DECONNEXION = "DECONNEXION";
+export const GET_AUTH_USER = "GET_AUTH_USER";
+export const AUTH_ERRORS = "AUTH_ERRORS";
