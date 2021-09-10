@@ -14,6 +14,10 @@ app.use(fileUpload({ useTempFiles: true }));
 
 //routes
 app.use("/utilisateur", require("./routes/utilisateurRouter"));
+app.use("/categorie", require("./routes/categorieRouter"));
+app.use("/produit", require("./routes/produitRouter"));
+app.use("/commande", require("./routes/commandeRouter"));
+app.use("/panier", require("./routes/panierRouter"));
 
 // connect to DB
 connect();

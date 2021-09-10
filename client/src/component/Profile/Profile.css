@@ -1,0 +1,188 @@
+.space {
+  white-space: pre-wrap;
+}
+.backProfile {
+  background-image: url(../../img/aa.jpg);
+  background-size: cover;
+}
+.body-profile {
+  color: #fff;
+  text-align: center;
+}
+.compte {
+  background: none !important;
+  margin-top: 100px !important;
+}
+.moving-letters {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  height: 200px;
+}
+.ml8 {
+  font-weight: 800;
+  font-size: 4.5em;
+  color: #fff;
+  width: 3em;
+  height: 3em;
+}
+
+.ml8 .letters-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  height: 1em;
+}
+
+.ml8 .letters {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  line-height: 0.7em;
+  right: -0.12em;
+  top: -0.2em;
+}
+
+.ml8 .bang {
+  font-size: 1.4em;
+  top: auto;
+  left: -0.06em;
+}
+
+.ml8 .circle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+}
+
+.ml8 .circle-white {
+  width: 3em;
+  height: 3em;
+  border: 2px dashed white;
+  border-radius: 2em;
+}
+
+.ml8 .circle-dark {
+  width: 6.2em;
+  height: 6.2em;
+  background-color: #ff899fe1;
+  border-radius: 4em;
+  z-index: 1;
+}
+
+.ml8 .circle-dark-dashed {
+  border-radius: 4.4em;
+  background-color: transparent;
+  border: 2px dashed #ff899f;
+  width: 6.3em;
+  height: 6.3em;
+}
+
+/* vertical menu */
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+.container-list {
+  padding-left: 50px;
+}
+
+.card-list {
+  height: 420px;
+  background-color: #fff;
+  border-radius: 10px 10px;
+}
+.row {
+  margin-right: calc(var(--bs-gutter-x) / -2) !important;
+  margin-left: calc(var(--bs-gutter-x) / -2) !important;
+}
+
+.card-pro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+.iconM {
+  font-size: 18px;
+  margin-left: 170px;
+  color: #2f89fc;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.body li {
+  transition: 1s all;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  padding: 15px;
+  margin-left: -40px;
+  margin-top: 0px;
+  color: black;
+  list-style: none;
+  display: block;
+  border: solid 1px;
+  text-align: left;
+}
+
+.body li:hover {
+  font-weight: 600;
+  transition: 1s all;
+  color: rgb(66, 66, 66);
+  background-color: #ff899fe1;
+  border-top-right-radius: 10px 10px;
+  border-bottom-right-radius: 10px 10px;
+  cursor: pointer;
+
+  border-top-left-radius: 10px 10px;
+  border-bottom-left-radius: 10px 10px;
+}
+
+.body > li {
+  float: left;
+}
+
+.body li ul {
+  background: #1e2b32;
+  margin-left: 280px;
+  margin-top: -38px;
+  display: none;
+  position: absolute;
+  border-top-right-radius: 15px 15px;
+  border-bottom-right-radius: 15px 15px;
+}
+
+.body li:hover > ul {
+  display: block;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-mod-mdp {
+  color: #ff899fe1;
+  align-self: flex-start;
+  margin: 16px;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  height: 40px;
+  margin-top: 20px;
+}
+.btn-mod-mdp:hover {
+  margin: 16px;
+  margin-top: 20px;
+  background-color: #ffc2cd !important;
+  border-radius: 10px;
+}

@@ -17,4 +17,6 @@ router.post("/connexion", loginRules(), validator, utilisateurCtrl.connexion);
 router.get("/deconnexion", utilisateurCtrl.deconnexion);
 router.get("/refresh_token", utilisateurCtrl.refreshToken);
 router.get("/infor", auth, utilisateurCtrl.getUtilisateur);
+
+router.put("/modifierUtilisateur/:id", utilisateurCtrl.editUtilisateur);
 module.exports = router;

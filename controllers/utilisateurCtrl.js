@@ -5,14 +5,14 @@ const jwt = require("jsonwebtoken");
 const utilisateurCtrl = {
   inscription: async (req, res) => {
     try {
-      const { nom, prenom, email, mot_de_passe, role } = req.body;
+      const { nom, prenom, email, mot_de_passe } = req.body;
       const utilisateur = await Utilisateurs.findOne({ email });
       if (utilisateur)
         return res.status(400).json({ msg: "E-mail déjà utilisé" });
-      if (mot_de_passe.length < 8)
-        return res
-          .status(400)
-          .json({ msg: "Le mot de passe doit être minimum 8 caractères" });
+      // if (mot_de_passe.length < 8)
+      //   return res
+      //     .status(400)
+      //     .json({ msg: "Le mot de passe doit être minimum 8 caractères" });
 
       // Password Encryption
       const passwordHash = await bcrypt.hash(mot_de_passe, 10);
@@ -20,7 +20,6 @@ const utilisateurCtrl = {
         nom,
         prenom,
         email,
-        role,
         mot_de_passe: passwordHash,
       });
 
@@ -28,7 +27,7 @@ const utilisateurCtrl = {
       await newUtilisateur.save();
 
       // Then create jsonwebtoken to authentication
-      const accesstoken = createAccessToken({ id: newUtilisateur._id });
+      const token = createAccessToken({ id: newUtilisateur._id });
       const refreshtoken = createRefreshToken({ id: newUtilisateur._id });
 
       res.cookie("refreshtoken", refreshtoken, {
@@ -37,7 +36,11 @@ const utilisateurCtrl = {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
       });
 
-      res.json({ accesstoken });
+      res.status(200).send({
+        msg: "User registred with success",
+        newUtilisateur,
+        token,
+      });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
@@ -46,23 +49,27 @@ const utilisateurCtrl = {
     try {
       const { email, mot_de_passe } = req.body;
 
-      const user = await Utilisateurs.findOne({ email });
-      if (!user) return res.status(400).json({ msg: "User does not exist." });
+      const newUtilisateur = await Utilisateurs.findOne({ email });
+      if (!newUtilisateur)
+        return res.status(400).json({ msg: "User does not exist." });
 
-      const isMatch = await bcrypt.compare(mot_de_passe, user.mot_de_passe);
+      const isMatch = await bcrypt.compare(
+        mot_de_passe,
+        newUtilisateur.mot_de_passe
+      );
       if (!isMatch) return res.status(400).json({ msg: "Incorrect password." });
 
       // If login success , create access token and refresh token
-      const accesstoken = createAccessToken({ id: user._id });
-      const refreshtoken = createRefreshToken({ id: user._id });
+      const token = createAccessToken({ id: newUtilisateur._id });
+      // const refreshtoken = createRefreshToken({ id: newUtilisateur._id });
 
-      res.cookie("refreshtoken", refreshtoken, {
-        httpOnly: true,
-        path: "/utilisateur/refresh_token",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
-      });
+      // res.cookie("refreshtoken", refreshtoken, {
+      //   httpOnly: true,
+      //   path: "/utilisateur/refresh_token",
+      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
+      // });
 
-      res.json({ accesstoken, user });
+      res.send({ msg: "Logged in with success", token, newUtilisateur });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
@@ -95,17 +102,33 @@ const utilisateurCtrl = {
   },
   getUtilisateur: async (req, res) => {
     try {
-      const user = await Utilisateurs.findById(req.utilisateur.id).select(
+      const user = await Utilisateurs.findById(req.user.id).select(
         "-mot_de_passe"
       );
-
+      console.log("ddddddddddddddddd", user);
       if (!user) return res.status(400).json({ msg: "User does not exist." });
-
-      res.status(200).send({ user: user });
+      res.status(200).send({ user: req.user });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
+    // res.status(200).send({ user: req.user });
   },
+  //http://localhost:5000/api/persons/updatePerson
+  // simple update
+  //Public
+  editUtilisateur: async (req, res) => {
+    try {
+      const user = await Utilisateurs.findOneAndUpdate(
+        { _id: req.params.id },
+        { $set: { ...req.body } }
+      );
+      res.json({ msg: "user edited", user });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+    // res.status(200).send({ user: req.user });
+  },
+
   // addCart: async (req, res) => {
   //   try {
   //     const user = await Users.findById(req.user.id);
@@ -135,7 +158,7 @@ const utilisateurCtrl = {
 };
 
 const createAccessToken = (user) => {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "11m" });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "7d" });
 };
 const createRefreshToken = (user) => {
   return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "7d" });

@@ -9,9 +9,9 @@ import {
 
 const initialState = {
   token: localStorage.getItem("token"), //null
-  utilisateur: null,
+  user: null,
   isAuth: false,
-  isLoading: false,
+  isLoading: true,
   msg: null,
 };
 
@@ -20,7 +20,7 @@ const authReducer = (state = initialState, { type, payload }) => {
     case LOADING_UTILISATEUR:
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
       };
     case INSCRIPTION:
     case CONNEXION:
@@ -29,6 +29,7 @@ const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         isLoading: false,
         isAuth: true,
+        msg: payload.msg,
         ...payload,
       };
     case GET_AUTH_USER:
@@ -40,12 +41,13 @@ const authReducer = (state = initialState, { type, payload }) => {
       };
     case AUTH_ERRORS:
     case DECONNEXION:
+      localStorage.removeItem("token");
       return {
         ...state,
         token: null,
         isLoading: false,
         isAuth: false,
-        utilisateur: null,
+        user: null,
       };
     default:
       return state;

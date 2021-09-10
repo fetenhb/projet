@@ -31,7 +31,7 @@ const utilisateurSchema = new mongoose.Schema({
   },
   role: {
     type: Number,
-    default: 1,
+    default: 0,
   },
 
   adress: {
@@ -49,6 +49,13 @@ const utilisateurSchema = new mongoose.Schema({
   gouvernorat: {
     type: String,
   },
+  paniers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Panier",
+    },
+  ],
+  totalPanier: { type: mongoose.Schema.Types.ObjectId, ref: "Total" },
 });
 
 module.exports = mongoose.model("Utilisateurs", utilisateurSchema);
