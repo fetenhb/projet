@@ -13,6 +13,9 @@ router.get("/getPanier", auth, panierCtrl.getPanier);
 
 router.put("/updatePanier/:id", auth, panierCtrl.updatePanier);
 router.delete("/deletePanier/:id", panierCtrl.deletePanier);
-router.post("/addTotalPanier", auth, panierCtrl.totalPanier);
+router.post("/addTotalPanierr", auth, panierCtrl.totalPanier);
+router.put("/editTotalPanierr", auth, panierCtrl.totalPanier);
+
+router.get("/getTotalPanier", auth, panierCtrl.getTotalPanier);
 
 module.exports = router;

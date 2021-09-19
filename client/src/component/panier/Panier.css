@@ -121,21 +121,22 @@
 .dollar {
   padding-top: 20px;
 }
-button[class*="btn"] {
-  width: 30px;
-  height: 30px;
-  background-color: #e1e8ee;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
+
 .minus-btn img {
   margin-bottom: 3px;
 }
 .plus-btn img {
   margin-top: 2px;
 }
-
+.minus-btn,
+.plus-btn {
+  width: 30px !important;
+  height: 30px !important;
+  background-color: #e1e8ee;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
 button:focus,
 input:focus {
   outline: 0;

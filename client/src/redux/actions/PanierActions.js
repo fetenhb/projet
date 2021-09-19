@@ -3,9 +3,9 @@ import {
   GET_PANIER,
   ADD_PANIER,
   UPDATE_PANIER,
-  INCREMENT_QUANT,
-  DECREMENT_QUANT,
+  TOTAL_PANIER,
   DELETE_PANIER,
+  GET_TOTAL_PANIER,
 } from "../constants/ActionTypesPanier";
 //get panier
 export const get_panier = () => async (dispatch) => {
@@ -85,6 +85,27 @@ export const delete_panier = (idPanier) => async (dispatch) => {
     dispatch({
       type: DELETE_PANIER,
       payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//get total panier
+export const get_totalPanier = () => async (dispatch) => {
+  try {
+    //headers
+    const config = {
+      headers: { Authorization: localStorage.getItem("token") },
+    };
+    const res = await axios.get(
+      "http://localhost:5000/panier/getTotalPanier",
+
+      config
+    );
+    dispatch({
+      type: GET_TOTAL_PANIER,
+      payload: res.data, // {user: req.user}
     });
   } catch (error) {
     console.log(error);

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { edit_produit } from "../../redux/actions/CategorieActions";
+import {
+  delete_prod,
+  edit_produit,
+} from "../../redux/actions/CategorieActions";
 import { Button, Modal, Form } from "react-bootstrap";
 import { add_panier } from "../../redux/actions/PanierActions";
 
@@ -27,9 +30,9 @@ const ProduitCard = ({ el, categorieFound }) => {
   const ajout_panier = () => {
     dispatch(add_panier({ titre, images, prix, description }));
   };
-  // const deletee = () => {
-  //   dispatch(delete_prod(cat._id));
-  // };
+  const deletee = () => {
+    dispatch(delete_prod(categorieFound && categorieFound._id, el._id));
+  };
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -49,7 +52,9 @@ const ProduitCard = ({ el, categorieFound }) => {
                   <p>{el.prix} dt</p>
                 </div>
                 <div class="buy">
-                  <i class="material-icons">delete</i>
+                  <i class="material-icons" onClick={() => deletee()}>
+                    delete
+                  </i>
                 </div>{" "}
                 <div class="buy">
                   <i class="material-icons" onClick={handleShow}>
@@ -95,7 +100,7 @@ const ProduitCard = ({ el, categorieFound }) => {
                     <Button variant="secondary" onClick={handleClose}>
                       Close
                     </Button>
-                    <Button variant="primary" onClick={edit}>
+                    <Button variant="primary" onClick={() => edit()}>
                       Save Changes
                     </Button>
                   </Modal.Footer>

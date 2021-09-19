@@ -6,20 +6,20 @@ const auth = async (req, res, next) => {
 
     // Check for token
     if (!token)
-      return res.status(401).send({ msg: "No Token, authorization denied" });
-    console.log("tokennnnnnn", token);
+      return res.status(401).send({ msg: "No Tokennnn, authorization denied" });
+    // console.log("tokennnnnnn", token);
     // Verify Token
     const decoded = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     // Add User from payload
     const userr = await userModel.findById(decoded.id);
-    console.log("rrrrr", userr);
+    // console.log("rrrrr", userr);
     //Check for user
     if (!userr) {
       // return res.status(401).send({ msg: "authorization denied" })
       return console.log("authorization denied");
     }
-    console.log("tokennnnnnn", token);
+    // console.log("tokennnnnnn", token);
 
     // Create user
     req.user = userr;

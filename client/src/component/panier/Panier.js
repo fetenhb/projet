@@ -7,55 +7,58 @@ import minus from "./minus.svg";
 import {
   delete_panier,
   edit_panier,
-  incrementQuantie,
+  get_totalPanier,
 } from "../../redux/actions/PanierActions";
+import { total_panier } from "../../redux/actions/TotPanierActions";
 
-const Panier = ({ pan }) => {
-  console.log("panier", pan && pan);
+const Panier = ({ pan, tot }) => {
+  //   console.log("panier", pan && pan);
 
   useEffect(() => {
-    document.body.className = "body_panier";
+    // document.body.className = "body_panier";
     // like
-    let likeBtn = document.querySelectorAll(".like-btn");
-    for (let i = 0; i < likeBtn.length; i++) {
-      likeBtn[i].addEventListener("click", function () {
-        likeBtn[i].classList.toggle("is-active");
-      });
-    }
+    // let likeBtn = document.querySelectorAll(".like-btn");
+    // for (let i = 0; i < likeBtn.length; i++) {
+    //   likeBtn[i].addEventListener("click", function () {
+    //     likeBtn[i].classList.toggle("is-active");
+    //   });
+    // }
   }, []);
+  console.log("panierrrr user", pan && pan.utilisateurId);
 
   const [quantite, setQuantite] = useState(pan.quantite);
-  const dispatch = useDispatch();
+  const [totalPanier, setTot] = useState(tot());
 
+  const dispatch = useDispatch();
+  console.log("tottttttttttttttt,", totalPanier);
   const deletePanier = () => {
     dispatch(delete_panier(pan._id));
   };
   //   console.log("quant", quantite);
 
   const plus_quantite = async () => {
-    console.log("quantitee", quantite);
+    setTot(tot());
+
+    dispatch(total_panier({ totalPanier }));
     let x = quantite;
     x++;
-    console.log("x", x);
-    await setQuantite(x);
-    console.log("quantite 2", quantite);
-    dispatch(
-      edit_panier(pan._id, {
-        quantite,
-      })
-    );
+    setQuantite(x);
+    dispatch(edit_panier(pan._id, { quantite }));
+    setTot(tot());
+    dispatch(total_panier({ totalPanier }));
+
+    console.log("quantitee", quantite);
     console.log("pannnn", pan && pan);
   };
   const moins_quantite = () => {
     let y = quantite;
     y--;
     setQuantite(y);
-    dispatch(
-      edit_panier(pan._id, {
-        quantite,
-      })
-    );
+    dispatch(edit_panier(pan._id, { quantite }));
+    setTot(tot());
+    dispatch(total_panier({ totalPanier }));
   };
+  //   console.log("quantittttee", quantite);
   return (
     <div>
       <div class="item">
@@ -65,13 +68,11 @@ const Panier = ({ pan }) => {
         </div>
 
         <div class="image">
-          <img src={pan && pan.images} width="50px" height="50px" />
+          <img src={pan && pan.images} width="200px" height="100px" />
         </div>
 
         <div class="description">
           <span>{pan && pan.titre}</span>
-
-          <span>{pan && pan.description}</span>
         </div>
 
         <div class="quantity">

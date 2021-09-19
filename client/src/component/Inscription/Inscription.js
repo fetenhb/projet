@@ -4,8 +4,11 @@ import "../Inscription/Inscription.css";
 import "../Inscription/js/main";
 import img from "../../img/form.png";
 import { inscription } from "../../redux/actions/AuthActions";
+import { useHistory, Link } from "react-router-dom";
 import $ from "jquery";
 const Inscription = () => {
+  const history = useHistory();
+
   useEffect(() => {
     document.body.className = "body-ConnexionInscription";
     $(function () {
@@ -24,6 +27,7 @@ const Inscription = () => {
   const handleInscription = (e) => {
     e.preventDefault();
     dispatch(inscription({ nom, prenom, email, mot_de_passe }));
+    history.push("/");
   };
 
   return (

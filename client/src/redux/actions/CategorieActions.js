@@ -54,3 +54,10 @@ export const edit_produit = (idCat, idProd, editedProd) => (dispatch) => {
     .then((res) => dispatch(get_categories()))
     .catch((err) => console.log(err));
 };
+//delete produit
+export const delete_prod = (idCat, idProd) => (dispatch) => {
+  axios
+    .put("http://localhost:5000/produit/deleteProduit/" + idCat + "/" + idProd)
+    .then((res) => dispatch(get_categories()))
+    .catch((err) => console.log(err));
+};

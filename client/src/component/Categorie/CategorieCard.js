@@ -38,70 +38,69 @@ const CategorieCard = ({ cat }) => {
             href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
             rel="stylesheet"
           />
-          <Link to={`/catégorie/${cat.nom}`}>
+          {/* <Link to={`/catégorie/${cat.nom}`}> */}{" "}
+          <div class="card">
             {" "}
-            <div class="card">
-              {" "}
-              <div
-                class="card__background"
-                style={{ backgroundImage: `url(${cat.image})` }}
-              ></div>{" "}
-              <div class="card__content">
-                <p class="card__category">Categorie</p>
+            <div
+              class="card__background"
+              style={{ backgroundImage: `url(${cat.image})` }}
+            ></div>{" "}
+            <div class="card__content">
+              <p class="card__category">Categorie</p>
 
-                <h3 class="card__heading">{cat.nom}</h3>
-              </div>{" "}
-              <div class="card__content">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    width: "250px",
-                  }}
-                >
-                  {" "}
-                  <div class="container">
-                    <i class="fa fa-pencil iconn" onClick={handleShow}></i>
-
-                    <Modal show={show} onHide={handleClose}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>{nom}</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <Form.Group>
-                          <Form.Control
-                            type="text"
-                            placeholder="nom catégorie"
-                            value={nom}
-                            onChange={(e) => setNom(e.target.value)}
-                          />
-                          <br />{" "}
-                          <Form.Control
-                            type="text"
-                            placeholder="image catégorie"
-                            value={image}
-                            onChange={(e) => setImage(e.target.value)}
-                          />
-                        </Form.Group>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                          Close
-                        </Button>
-                        <Button variant="primary" onClick={edit}>
-                          Save Changes
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </div>
-                  <i
-                    class="fa fa-trash-o iconn margin-icon"
-                    onClick={() => deletee()}
-                  ></i>
-                </div>
-              </div>{" "}
+              <h3 class="card__heading">{cat.nom}</h3>
             </div>{" "}
-          </Link>{" "}
+            <div class="card__content">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  width: "250px",
+                }}
+              >
+                {" "}
+                <div class="container">
+                  <i class="fa fa-pencil iconn" onClick={handleShow}></i>
+
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>{nom}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <Form.Group>
+                        <Form.Control
+                          type="text"
+                          placeholder="nom catégorie"
+                          value={nom}
+                          onChange={(e) => setNom(e.target.value)}
+                        />
+                        <br />{" "}
+                        <Form.Control
+                          type="text"
+                          placeholder="image catégorie"
+                          value={image}
+                          onChange={(e) => setImage(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                      <Button variant="primary" onClick={edit}>
+                        Save Changes
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                </div>
+                <i
+                  class="fa fa-trash-o iconn margin-icon"
+                  onClick={() => deletee()}
+                ></i>
+              </div>
+            </div>{" "}
+          </div>{" "}
+          {/* </Link>{" "} */}
         </div>
       ) : (
         <div>

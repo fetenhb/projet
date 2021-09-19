@@ -29,10 +29,12 @@ const categorieSchema = new mongoose.Schema(
         },
         description: {
           type: String,
+          required: true,
         },
 
         images: {
           type: Object,
+          required: true,
         },
 
         disponibilite: {

@@ -31,7 +31,7 @@ const utilisateurSchema = new mongoose.Schema({
   },
   role: {
     type: Number,
-    default: 0,
+    default: 1,
   },
 
   adress: {

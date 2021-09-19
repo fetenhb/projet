@@ -91,14 +91,14 @@ const produitCtrl = {
 
   deleteProduit: async (req, res) => {
     try {
-      const cat = await Categories.update(
-        { _id: req.params.id },
-        {
-          $pull: { prod: { "prod._id": req.params.id } },
-        }
-      );
-
+      const cat = await Categories.find();
       console.log(cat);
+      console.log(typeof cat);
+      const prodd = await Categories.update({
+        $pull: { "prod._id": req.params.id },
+      });
+
+      console.log("cat modifie", prodd);
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
@@ -114,6 +114,8 @@ const produitCtrl = {
           $set: {
             "prod.$.titre": req.body.titre,
             "prod.$.prix": req.body.prix,
+            "prod.$.description": req.body.description,
+            "prod.$.images": req.body.images,
           },
         }
       );
